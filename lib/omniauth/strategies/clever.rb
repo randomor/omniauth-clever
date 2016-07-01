@@ -41,6 +41,11 @@ module OmniAuth
           end
         end
       end
+      
+      #Override so we don't attach query strings per OmniAuth::Strategies::OAuth2
+      def callback_url
+        full_host + script_name + callback_path
+      end
 
       uid{ raw_info['data']['id'] }
 
